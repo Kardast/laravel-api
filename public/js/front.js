@@ -5102,22 +5102,21 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'App',
   data: function data() {
     return {
       baseUrl: window.location.origin,
-      posts: []
+      posts: [] // page: 1
+
     };
   },
   created: function created() {
     var _this = this;
 
-    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('http://localhost:8000/api/posts').then(function (res) {
-      _this.res.data.response.data;
+    axios.get('http://localhost:8000/api/posts').then(function (res) {
+      _this.posts = res.data.response.data; // this.page= res.data.response.current_page;
+
       console.log(res);
     })["catch"](function (error) {
       return console.log('errore!');
@@ -5144,10 +5143,94 @@ var render = function render() {
 
   return _c("div", {
     staticClass: "container"
-  }, [_vm._v("\n    ciao\n")]);
+  }, [_c("h1", {
+    staticClass: "text-center"
+  }, [_vm._v("Boolpress")]), _vm._v(" "), _c("div", {
+    staticClass: "row g-2"
+  }, _vm._l(_vm.posts, function (post) {
+    return _c("div", {
+      key: post.id,
+      staticClass: "col-sm-6 col-md-4"
+    }, [_c("div", {
+      staticClass: "card h-100"
+    }, [_c("img", {
+      staticClass: "card-img-top",
+      attrs: {
+        src: post.image,
+        alt: post.title
+      }
+    }), _vm._v(" "), _c("div", {
+      staticClass: "card-body d-flex flex-column"
+    }, [_c("h5", {
+      staticClass: "card-title"
+    }, [_vm._v(_vm._s(post.title))]), _vm._v(" "), _c("p", {
+      staticClass: "card-text mb-auto"
+    }, [_vm._v(_vm._s(post.excerpt))]), _vm._v(" "), _c("a", {
+      staticClass: "btn btn-primary",
+      attrs: {
+        href: _vm.baseUrl + "/posts/" + post.slug
+      }
+    }, [_vm._v("Go somewhere")])])])]);
+  }), 0), _vm._v(" "), _vm._m(0)]);
 };
 
-var staticRenderFns = [];
+var staticRenderFns = [function () {
+  var _vm = this,
+      _c = _vm._self._c;
+
+  return _c("nav", {
+    attrs: {
+      "aria-label": "Page navigation example"
+    }
+  }, [_c("ul", {
+    staticClass: "pagination justify-content-center"
+  }, [_c("li", {
+    staticClass: "page-item"
+  }, [_c("a", {
+    staticClass: "page-link",
+    attrs: {
+      href: "#",
+      "aria-label": "Previous"
+    }
+  }, [_c("span", {
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }, [_vm._v("«")])])]), _vm._v(" "), _c("li", {
+    staticClass: "page-item"
+  }, [_c("a", {
+    staticClass: "page-link",
+    attrs: {
+      href: "#"
+    }
+  }, [_vm._v("1")])]), _vm._v(" "), _c("li", {
+    staticClass: "page-item"
+  }, [_c("a", {
+    staticClass: "page-link",
+    attrs: {
+      href: "#"
+    }
+  }, [_vm._v("2")])]), _vm._v(" "), _c("li", {
+    staticClass: "page-item"
+  }, [_c("a", {
+    staticClass: "page-link",
+    attrs: {
+      href: "#"
+    }
+  }, [_vm._v("3")])]), _vm._v(" "), _c("li", {
+    staticClass: "page-item"
+  }, [_c("a", {
+    staticClass: "page-link",
+    attrs: {
+      href: "#",
+      "aria-label": "Next"
+    }
+  }, [_c("span", {
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }, [_vm._v("»")])])])])]);
+}];
 render._withStripped = true;
 
 
